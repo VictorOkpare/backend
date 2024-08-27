@@ -17,14 +17,16 @@ class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
     def get_token(cls, user):
         token = super().get_token(user)
         
-        # These are claims, you can add custom claims
-        token['full_name'] = user.profile.full_name
+        token['first_name'] = user.profile.first_name
+        token['last_name'] = user.profile.last_name
+        token['other_names'] = user.profile.other_names
         token['username'] = user.username
         token['email'] = user.email
-        token['mobile'] = user.profile.mobile
-        token['image'] = str(user.profile.image)
+        token['phone'] = user.profile.phone
+        token['alt_phone'] = user.profile.alt_phone
+        token['profile_pic'] = str(user.profile.profile_pic)
         token['address'] = user.profile.address
-        # ...
+
         return token
 
 
@@ -34,9 +36,15 @@ class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
 class ProfileSerializer(serializers.ModelSerializer):
     class Meta:
         model = Profile
-        fields = ['full_name', 'mobile', 'image', 'address']
-
-
+        fields = [
+            'first_name', 
+            'last_name', 
+            'other_names', 
+            'address', 
+            'phone', 
+            'alt_phone', 
+            'profile_pic'
+        ]
 class RegisterSerializer(serializers.ModelSerializer):
     password = serializers.CharField(
         write_only=True, required=True, validators=[validate_password])

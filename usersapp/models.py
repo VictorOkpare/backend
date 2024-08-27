@@ -16,11 +16,16 @@ class User(AbstractUser):
 
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    full_name = models.CharField(max_length=1000)
-    mobile = models.CharField(max_length=11)
-    image = models.ImageField(upload_to="user_images", default="default.jpg")
+    first_name = models.CharField(max_length=100, default='')
+    last_name = models.CharField(max_length=100, default='')
+    other_names = models.CharField(max_length=100, blank=True, null=True)
     address = models.CharField(max_length=1000)
-
+    phone = models.CharField(max_length=11)
+    alt_phone = models.CharField(max_length=11, blank=True, null=True)
+    profile_pic = models.ImageField(upload_to="user_images", default="default.jpg")
+    
+def __str__(self):
+    return f'{self.user.username}'
 
 def create_user_profile(sender, instance, created, **kwargs):
     if created:
