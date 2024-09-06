@@ -87,7 +87,7 @@ WSGI_APPLICATION = 'backend.wsgi.application'
 # import environ
 # env = environ.Env()
 # environ.Env.read_env()
-import dj_database_url
+
 
 DATABASES = {
     'default': {
