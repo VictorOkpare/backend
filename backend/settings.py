@@ -84,14 +84,18 @@ WSGI_APPLICATION = 'backend.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
+import environ
+env = environ.Env()
+environ.Env.read_env()
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'backenddb',
-        'USER': 'admin',
-        'PASSWORD': 'tolu2020', 
-        'HOST': 'localhost', 
-        'PORT': '5432',  
+        'NAME': env('DB_NAME', default='backenddb'),
+        'USER': env('DB_USER', default='admin'),
+        'PASSWORD': env('DB_PASSWORD', default='tolu2020'),
+        'HOST': env('DB_HOST', default='localhost'),
+        'PORT': env('DB_PORT', default='5432'),
     }
 }
 
@@ -159,8 +163,8 @@ CORS_ALLOWED_ORIGINS = [
     
     "http://localhost:5173", "https://otellastore.vercel.app"
 ]
-
-CORS_ALLOW_ALL_ORIGINS = True
+CSRF_TRUSTED_ORIGINS = ['https://backend-1-exft.onrender.com', 'https://otellastore.vercel.app']
+# CORS_ALLOW_ALL_ORIGINS = True
 # Internationalization
 # https://docs.djangoproject.com/en/5.0/topics/i18n/
 
@@ -225,3 +229,5 @@ JAZZMIN_UI_TWEAKS = {
         "success": "btn-success",
     },
 }
+
+
