@@ -90,19 +90,14 @@ WSGI_APPLICATION = 'backend.wsgi.application'
 import dj_database_url
 
 DATABASES = {
-    'default':
-        dj_database_url.config(
-            default ='postgresql://backenddb_knn5_user:xs1HtrotiDWgJm07cY6uU0UAWxSce15Z@dpg-crdeqgbqf0us73b20ft0-a/backenddb_knn5'
-        ),
-    #     {
-        
-    #     'ENGINE': 'django.db.backends.postgresql',
-    #     'NAME': env('DB_NAME', default='backenddb'),
-    #     'USER': env('DB_USER', default='admin'),
-    #     'PASSWORD': env('DB_PASSWORD', default='tolu2020'),
-    #     'HOST': env('DB_HOST', default='localhost'),
-    #     'PORT': env('DB_PORT', default='5432'),
-    # }
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': os.getenv('DB_NAME', 'backenddb_knn5'),
+        'USER': os.getenv('DB_USER', 'backenddb_knn5_user'),
+        'PASSWORD': os.getenv('DB_PASSWORD', 'xs1HtrotiDWgJm07cY6uU0UAWxSce15Z'),
+        'HOST': os.getenv('DB_HOST', 'dpg-crdeqgbqf0us73b20ft0-a'),
+        'PORT': os.getenv('DB_PORT', '5432'),
+    }
 }
 
 
