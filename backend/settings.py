@@ -84,19 +84,25 @@ WSGI_APPLICATION = 'backend.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
-import environ
-env = environ.Env()
-environ.Env.read_env()
+# import environ
+# env = environ.Env()
+# environ.Env.read_env()
+import dj_database_url
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': env('DB_NAME', default='backenddb'),
-        'USER': env('DB_USER', default='admin'),
-        'PASSWORD': env('DB_PASSWORD', default='tolu2020'),
-        'HOST': env('DB_HOST', default='localhost'),
-        'PORT': env('DB_PORT', default='5432'),
-    }
+    'default':
+        dj_database_url.config(
+            default ='postgresql://backenddb_knn5_user:xs1HtrotiDWgJm07cY6uU0UAWxSce15Z@dpg-crdeqgbqf0us73b20ft0-a/backenddb_knn5'
+        ),
+    #     {
+        
+    #     'ENGINE': 'django.db.backends.postgresql',
+    #     'NAME': env('DB_NAME', default='backenddb'),
+    #     'USER': env('DB_USER', default='admin'),
+    #     'PASSWORD': env('DB_PASSWORD', default='tolu2020'),
+    #     'HOST': env('DB_HOST', default='localhost'),
+    #     'PORT': env('DB_PORT', default='5432'),
+    # }
 }
 
 
